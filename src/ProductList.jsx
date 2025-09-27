@@ -253,11 +253,10 @@ function ProductList({ onHomeClick }) {
     };
 
     const handleAddToCart = (product) => {
-  dispatch(addItem(product)); // Dispatch the action to add the product to the cart (Redux action)
-
-  setAddedToCart((prevState) => ({ // Update the local state to reflect that the product has been added
-    ...prevState, // Spread the previous state to retain existing entries
-    [product.name]: true, // Set the current product's name as a key with value 'true' to mark it as added
+  dispatch(addItem(product));
+  setAddedToCart((prevState) => ({
+    ...prevState,
+    [product.name]: true,
   }));
 };
 
@@ -291,26 +290,25 @@ const calculateTotalQuantity = () => {
             </div>
             {!showCart ? (
                 <div className="product-grid">
-                    {plantsArray.map((category, index) => ( // Loop through each category in plantsArray
-  <div key={index}> {/* Unique key for each category div */}
+                   {plantsArray.map((category, index) => (
+  <div key={index}>
     <h1>
-      <div>{category.category}</div> {/* Display the category name */}
+      <div>{category.category}</div>
     </h1>
-    <div className="product-list"> {/* Container for the list of plant cards */}
-      {category.plants.map((plant, plantIndex) => ( // Loop through each plant in the current category
-        <div className="product-card" key={plantIndex}> {/* Unique key for each plant card */}
-          <img 
-            className="product-image" 
-            src={plant.image} // Display the plant image
-            alt={plant.name} // Alt text for accessibility
+    <div className="product-list">
+      {category.plants.map((plant, plantIndex) => (
+        <div className="product-card" key={plantIndex}>
+          <img
+            className="product-image"
+            src={plant.image}
+            alt={plant.name}
           />
-          <div className="product-title">{plant.name}</div> {/* Display plant name */}
-          {/* Display other plant details like description and cost */}
-          <div className="product-description">{plant.description}</div> {/* Display plant description */}
-          <div className="product-cost">${plant.cost}</div> {/* Display plant cost */}
+          <div className="product-title">{plant.name}</div>
+          <div className="product-description">{plant.description}</div>
+          <div className="product-cost">${plant.cost}</div>
           <button
             className="product-button"
-            onClick={() => handleAddToCart(plant)} // Handle adding plant to cart
+            onClick={() => handleAddToCart(plant)}
           >
             Add to Cart
           </button>
